@@ -1,0 +1,59 @@
+﻿<Window x:Class="RSSReader.SettingsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:p="clr-namespace:RSSReader.Properties"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        mc:Ignorable="d"
+        ResizeMode="CanMinimize"
+        Title="SettingsWindow"
+        Height="400"
+        Width="350">
+  <Grid Margin="10,10,10,10"
+        HorizontalAlignment="Stretch">
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition Width="1*" />
+      <ColumnDefinition Width="2*" />
+    </Grid.ColumnDefinitions>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="1*" />
+      <RowDefinition Height="1*" />
+      <RowDefinition Height="7*" />
+      <RowDefinition Height="1*" />
+      <RowDefinition Height="1*" />
+    </Grid.RowDefinitions>
+    <Label Grid.Column="0"
+           Grid.Row="0"
+           Content="{x:Static p:Resources.Settings_UpdateIntervalLabelContent}"
+           VerticalAlignment="Top" />
+    <xctk:TimeSpanUpDown Grid.Column="1"
+                         Grid.Row="0"
+                         Height="23"
+                         VerticalAlignment="Top"
+                         Value="{Binding Source={x:Static p:Settings.Default}, Mode=OneTime, ValidatesOnDataErrors=True, Path=UpdateInterval}"
+                         AllowTextInput="True"
+                         Minimum="0:00:01"
+                         Name="UpdateIntervalControl" />
+    <Label Grid.Row="1"
+           Grid.ColumnSpan="2"
+           Content="{x:Static p:Resources.Settings_SourcesLabelContent}" />
+    <TextBox Grid.Column="0"
+             Grid.ColumnSpan="2"
+             Grid.Row="2"
+             AcceptsReturn="True"
+             TextWrapping="Wrap"
+             HorizontalScrollBarVisibility="Visible"
+             Name="FeedsTextBox" />
+    <CheckBox Grid.Column="0"
+              Grid.Row="3"
+              Grid.ColumnSpan="2"
+              VerticalAlignment="Center"
+              IsChecked="{Binding Source={x:Static p:Settings.Default}, Mode=TwoWay, Path=EnableFormatting}"
+              Content="{x:Static p:Resources.Settings_EnableFormattingLabelContent}" />
+    <Button Grid.Column="0"
+            Grid.Row="4"
+            Content="{x:Static p:Resources.Settings_Ok}"
+            Click="SaveSettings" />
+  </Grid>
+</Window>
